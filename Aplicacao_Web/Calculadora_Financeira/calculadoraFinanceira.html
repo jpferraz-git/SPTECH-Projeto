@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    Informe o custo da produção no último mês:
+    <input id="inpCusto" placeholder="R$"><br>
+    Informe o faturamento no último mês:
+    <input id="inpFaturamento" placeholder="R$"><br>
+    <button onclick="calcular()">
+        Calcular Projeções
+    </button>
+    <div id="resultado"></div>
+</body>
+</html>
+
+<script>
+    function calcular(){
+        // Declarando variáveis para facilitar o uso
+        const custo = Number(inpCusto.value)
+        const faturamento = Number(inpFaturamento.value)
+
+        // Calculando a projeção de perdas
+        var estimativaPerdaMesAnterior = custo * 0.15
+        var estimativaPerdaMesUm = estimativaPerdaMesAnterior * 1.15
+        var estimativaPerdaMesDois = estimativaPerdaMesUm * 1.15
+        var estimativaPerdaMesTres = estimativaPerdaMesDois * 1.15
+        var estimativaPerdaMesQuatro = estimativaPerdaMesTres * 1.15
+        var estimativaPerdaMesCinco = estimativaPerdaMesQuatro * 1.15
+        var estimativaPerdaMesSeis = estimativaPerdaMesCinco * 1.15
+
+        // Calculando a lucratividade atual
+        var lucratividadeMesAnterior = (faturamento - custo) - estimativaPerdaMesAnterior
+
+        // Calculando a projeção de lucratividade com a nossa solução
+        var lucroMesUmSolucao = lucratividadeMesAnterior * 1.15
+        var lucroMesDoisSolucao = lucroMesUmSolucao * 1.15
+        var lucroMesTresSolucao = lucroMesDoisSolucao * 1.15
+        var lucroMesQuatroSolucao = lucroMesTresSolucao * 1.15
+        var lucroMesCincoSolucao = lucroMesQuatroSolucao * 1.15
+        var lucroMesSeisSolucao = lucroMesCincoSolucao * 1.15
+
+        var lucroMesUmSolucaoF = lucroMesUmSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+
+        var lucroMesDoisSolucaoF = lucroMesDoisSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesTresSolucaoF = lucroMesTresSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesQuatroSolucaoF = lucroMesQuatroSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesCincoSolucaoF = lucroMesCincoSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesSeisSolucaoF = lucroMesSeisSolucao.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+
+        // Calculando a lucratividade sem a nossa solução
+        var lucroMesUm = lucroMesUmSolucao - estimativaPerdaMesUm
+        var lucroMesDois = lucroMesDoisSolucao - estimativaPerdaMesDois
+        var lucroMesTres = lucroMesTresSolucao - estimativaPerdaMesTres
+        var lucroMesQuatro = lucroMesQuatroSolucao - estimativaPerdaMesQuatro
+        var lucroMesCinco = lucroMesCincoSolucao - estimativaPerdaMesCinco
+        var lucroMesSeis = lucroMesSeisSolucao - estimativaPerdaMesSeis
+        
+        var lucroMesUmF = lucroMesUm.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+
+        var lucroMesDoisF = lucroMesDois.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesTresF = lucroMesTres.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesQuatroF = lucroMesQuatro.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesCincoF = lucroMesCinco.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+        
+        var lucroMesSeisF = lucroMesSeis.toLocaleString('pt-br',
+            {style:"currency",
+                currency: 'BRL'
+            }
+        )
+
+        resultado.innerHTML = `<br>
+        PROJEÇÃO ATUAL:<br>
+        No mês anterior, você lucrou aproximadamente: R$ ${lucratividadeMesAnterior}<br>
+        No mês passado, você perdeu em sua produção aproximadamente: R$ ${estimativaPerdaMesAnterior}<br>
+        <br>
+        A projeção da sua lucratividade no próximo semestre sem a nossa solução seria:<br>
+        <br>
+        Mês um: ${lucroMesUmF}<br>
+        Mês dois: ${lucroMesDoisF}<br>
+        Mês três: ${lucroMesTresF}<br>
+        Mês quatro: ${lucroMesQuatroF}<br>
+        Mês cinco: ${lucroMesCincoF}<br>
+        Mês seis: ${lucroMesSeisF}<br>
+        <br>
+        Segundo o EPAMIG (Empresa de Pesquisa Agropecuária de Minas Gerais), existem diversos defeitos causados por fatores de temperatura e umidade,<br>
+        sendo necessário um controle adequado dos mesmos para alcancar o ponto ideal do queijo e evitar perdas durante o processo.<br>
+        (O cálculo referente a lucratividade sem a nossa solução foi baseado no percentual de perda adquirido em pesquisas e artigos de queijarias e<br>
+        institutos voltados para agropecuária, você pode acessar parte dessas informações <a href="https://www.epamig.br/ilct/wp-content/uploads/2020/07/QUEIJO-MINAS-ARTESANAL-PRINCIPAIS-PROBLEMAS.pdf">aqui</a>).<br>
+        <br>
+        PROJEÇÃO COM NOSSA SOLUÇÃO:<br>
+        A projeção da sua lucratividade no próximo semestre seria:<br>
+        <br>
+        Mês um: ${lucroMesUmSolucaoF}<br>
+        Mês dois: ${lucroMesDoisSolucaoF}<br>
+        Mês três: ${lucroMesTresSolucaoF}<br>
+        Mês quatro: ${lucroMesQuatroSolucaoF}<br>
+        Mês cinco: ${lucroMesCincoSolucaoF}<br>
+        Mês seis: ${lucroMesSeisSolucaoF}
+        `
+    }
+</script>
