@@ -36,26 +36,18 @@
           Serial.print("Umidade: ");
           Serial.print(umidade);
           Serial.print(" % ");
-          Serial.print("Temperatura: ");
+          Serial.print("Temperatura (DHT11): ");
           Serial.print(temperatura_Dht11);
           Serial.println(" °C");
           
       }
        //PRINTARÁ OS DADOS DO SENSOR RM35
-      Serial.print("Temperatura (Sensor Analógico): ");
+      Serial.print("Temperatura (LM35): ");
       Serial.print(temperaturaCelsius);
       Serial.println(" °C");
 
 
       delay(1000); //GUARDARÁ UM SEGUNDO ANTES DE FAZER O PROXÍMO PRINT
   }
-
-
-
-
-
-
-
-
 
 
