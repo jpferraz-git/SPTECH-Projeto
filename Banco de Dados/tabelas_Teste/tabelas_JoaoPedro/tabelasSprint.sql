@@ -2,6 +2,7 @@ create database FrontCheese;
 
 use FrontCheese;
 
+-- TABELA DE SENSORES
 create table sensores(
 dados_Sensores int primary key auto_increment,
 id_prateleira int,
@@ -28,7 +29,7 @@ update sensores set umidade_DHT11 = 15.50 where dados_Sensores = 2;
  
 select * from sensores;
 
-
+-- TABELA DE CADASTRO
 create table cadastro(
 id_Usuario int primary key auto_increment,
 nome varchar (100),
@@ -37,15 +38,29 @@ telefone int (12),
 empresa varchar (30)
 );
 
+
 insert into cadastro values 
-(default, 'claudio', '5g55',1111111111,'sadia'),
-(default, 'frizza', 'aaaaa', 123123, 'sptech'),
-(default, 'asd', 'asd', 144, 'asd');
+(default, 'Claudio Silva', '5g55',11977445522,'Lacta'),
+(default, 'Akira Junior', 'Dr4gonB4ll', 11923123123, 'Parmalat'),
+(default, 'Alvarez Juarez', 'Ch4v3s', 11944144144, 'Quatá'),
+(default, 'Ramon Martins', 's3nh4', 11985672342, 'Tirolez'),
+(default, 'Renata Classa', 'Qu3ijo', 11975223398, 'Vigor'),
+(default, 'Rebeca Andrade', 'rrbbaa', 11963471223, 'Carrefour');
 
 
+select * from cadastro;
 
+update cadastro set nome = 'Amanda Soares' where id = 3;
+
+
+-- TABELA DE VERIFICACAO
 create table verificacao(
-legislacao_EPAMIG float,
-media_Dados float
+legislacao_temperatura_EPAMIG float,
+legislacao_umidade_EPAMIG float,
+media_temperatura_Dados float,
+media_umidade_Dados float
 );
+
+insert into verificacao values
+(22.40, 16.50, 22.00, 16.00);
 
