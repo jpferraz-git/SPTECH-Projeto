@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    Digite o valor de produção do último mês? <br>
+    <input id="input_prod"> <br>
+    Digite o valor de faturamento do último mês?<br>
+    <input id="input_fatu"> <br>
+    Digite a quantidade de meses para projeção <br>
+    <input id="input_projecao"> <br>
+    <button onclick="calcQueijo()">Calcular Projeção</button> <br>
+    <div id="resultado"></div>  
+
+</body>
+</html>
+
+
+<script>
+
+    function calcQueijo (){
+
+        var Producao = Number(input_prod.value);
+        var Faturamento = Number(input_fatu.value);
+        var perdaMensal = Number(input_projecao.value);
+
+
+        var Fatu = (Faturamento * perdaMensal);
+
+        var perdaTotal = (Producao * 0.15) * perdaMensal;
+
+        var totalFatu = (Fatu + perdaTotal);
+
+            resultado.innerHTML = `Sua perda total é de R$:${perdaTotal} com um faturamento de ${Fatu}, com a utilização dos nossos sensores 
+            teria um lucro de 15%, tendo um total de R$:${totalFatu} de faturamento com nossos sensores`;
+
+        }
+        
+       
+
+
+
+</script>
