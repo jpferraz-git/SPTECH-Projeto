@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+</head>
+<body>
+    <h3>Informe a sua produção de queijo minas produzida no mês atual (em Kg):</h3>
+    <input id="input_prodMesAtual"><br>
+    <h3>Informe o custo médio gasto na produção de 1kg:</h3>
+    <input id="input_custoKg"><br>
+    <br>
+    <button onclick="calcularProjecao()"> Calcular Projeções </button>
+    <div id="exibirMensagem"></div>
+</body>
+</html>
+<script>
+    function calcularProjecao() {
+        // Valores do input
+        const producaoMesAtual = Number(input_prodMesAtual.value)
+        const custoKg = Number(input_custoKg.value)
+        const porcPerda = 0.15
+
+        // Calcular o custo do mês atual -- produção no mes atual em kg * custo do queijo a cada 1kg
+        var custoMesAtual = producaoMesAtual * custoKg
+
+        // Calcular a perda -- produção do mes atual em kg * 0.15
+        var perda = producaoMesAtual * porcPerda
+
+        // Calcular a produção efetiva -- seria a quantidade da produçao do mes atual em kg - a perda que teve
+        var producaoEfetiva = producaoMesAtual - perda
+
+        // Calcular o custo efetivo -- seria a producao e efetiva - o custo do kg do queijo
+        var custoEfetivo = producaoEfetiva * custoKg
+
+        // Calcular o custo de produção para 6 meses -- seria o custo efetivo * 6
+        var custoProducao6Meses = custoEfetivo * 6
+
+        // Calcular o custo sem perdas para 6 meses -- seria o custo sem as perdas * 6
+        var custoSemPerdas6Meses = custoMesAtual * 6
+
+        // Calcular a economia -- seria o custo total sem as perdas durante os 6 meses - o custo total da produção durante os 6 meses
+        var economia = custoSemPerdas6Meses - custoProducao6Meses
+
+        // Exibir os resultados
+        exibirMensagem.innerHTML =  `
+        Resultados:
+        <p>Custo do Mês Atual: R$ ${custoMesAtual.toFixed(2)}</p>
+        <p>Custo Efetivo com Perda: R$ ${custoEfetivo.toFixed(2)}</p>
+        <p>Custo de Produção para 6 Meses: R$ ${custoProducao6Meses.toFixed(2)}</p>
+        <p>Custo Sem Perdas para 6 Meses: R$ ${custoSemPerdas6Meses.toFixed(2)}</p>
+        <p>Economia após 6 Meses: R$ ${economia.toFixed(2)}</p>
+        `
+    }
+    </script>
