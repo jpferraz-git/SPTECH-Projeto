@@ -1,23 +1,34 @@
 
-// CÓDIGO SENSORES DE TEMPERATURA (RM35) E DE UMIDADE E TEMPERATURA (DHT11)
+// BLOCO 1
+
+// CÓDIGO SENSORES DE TEMPERATURA (LM35) E DE UMIDADE E TEMPERATURA (DHT11)
+
   #include "DHT.h" //TRAZ A BIBLIOTECA DOS SENSORES "DHT"
 
   #define TIPO_SENSOR DHT11 //DEFINE O SENSOR QUE SERÁ UTILIZADO (DHT11)
 
-  const int PINO_SENSOR_TEMPERATURA = A0; //CONSTANTE QUE INDICA A PORTA QUE SERÁ UTILIZADA NO SENSOR RM35 (A0)
+  // LM35
+  const int PINO_SENSOR_TEMPERATURA = A0; //CONSTANTE QUE INDICA A PORTA QUE SERÁ UTILIZADA NO SENSOR LM35 (A0)
 
-  float temperaturaCelsius; //VARIÁVEL QUE ARMAZENARA A TEMPERATURA DO SENSOR RM35
+  float temperaturaCelsius; //VARIÁVEL QUE ARMAZENARA A TEMPERATURA DO SENSOR LM35
 
+  // DHT11
   const int PINO_SENSOR_DHT11 = A1;//CONSTANTE QUE INDICA A PORTA QUE SERÁ UTILIZADA NO SENSOR DHT11(A1)
 
   DHT sensorDHT(PINO_SENSOR_DHT11, TIPO_SENSOR); //CRIA UMA VARIÁVEL "DHT" PARA O SENSOR DHT11
 
-  void setup() { //EXECUTADA QUANDO CODIGO É INICIADO
+
+// BLOCO 2
+  void setup() { //EXECUTADA QUANDO O CODIGO É INICIADO
 
       Serial.begin(9600); //DEFINE A TAXA DE BITS POR SEGUNDO UTILIZADA NA TRANSCRIÇÃO DE DADOS 
-      sensorDHT.begin(); //INICIALIZA O SENSOR DHT11
-        }
 
+      sensorDHT.begin(); //INICIALIZA O SENSOR DHT11
+      }
+
+
+
+// BLOCO 3
 
   void loop() { //EXECUTARÁ O CÓDIGO ENQUANTO ESTA CONDIÇÃO FOR VERDADEIRA
 
@@ -27,27 +38,29 @@
 
       float umidade = sensorDHT.readHumidity(); //OBTÉM A UMIDADE DO SENSOR DHT11
 
-      float temperatura_Dht11 = sensorDHT.readTemperature(); // OBTEM A TEMPERATURA DO SENSOR DHT11
 
-      if (isnan(temperatura_Dht11) || isnan(umidade)) {
-          Serial.println("Erro ao ler os dados do sensor"); //SE AS VARIÁVEIS NÃO FOREM UM NÚMERO, PRINTARA A SEGUINTE MENSAGEM
+      if (isnan(umidade) || isnan(temperaturaCelsius)) {
+          Serial.println("Erro ao ler os dados do sensor"); //SE AS VARIÁVEIS NÃO FOREM UM NÚMERO, PRINTARÁ A SEGUINTE MENSAGEM
       } else {
-                                //SE TUDO ESTIVE CORRETO, PRINTARÁ OS DADOS DO SENSOR DE DHT11
-          Serial.print("Umidade: ");
-          Serial.print(umidade);
-          Serial.print(" % ");
-          Serial.print("Temperatura (DHT11): ");
-          Serial.print(temperatura_Dht11);
-          Serial.println(" °C");
           
+          //SE TUDO ESTIVE CORRETO, PRINTARÁ OS DADOS DE UMIDADE DO SENSOR DE DHT11 E DADOS DE TEMPERATURA DO SENSOR LM35 
+          Serial.print("UmidadeMin:");
+          Serial.print(80); // METRICAS DE UMIDADE MINIMA
+          Serial.print(" ");
+          Serial.print("Umidade:");
+          Serial.print(umidade); //DADOS DO SENSOR DE UMIDADE
+          Serial.print(" ");
+          Serial.print("TemperaturaMáx:");
+          Serial.print(18); // METRICAS DE TEMPERATURA MAXIMA
+          Serial.print(" ");
+          Serial.print("TemperaturaMin:");
+          Serial.print(15); // METRICAS DE TEMPERATURA MINIMA 
+          Serial.print(" ");
+          Serial.print("Temperatura:");
+          Serial.println(temperaturaCelsius); // DADOS DO SENSOR DE TEMPERATURA
       }
-       //PRINTARÁ OS DADOS DO SENSOR RM35
-      Serial.print("Temperatura (LM35): ");
-      Serial.print(temperaturaCelsius);
-      Serial.println(" °C");
 
-
-      delay(1000); //GUARDARÁ UM SEGUNDO ANTES DE FAZER O PROXÍMO PRINT
+      delay(1000); //AGUARDARÁ UM SEGUNDO ANTES DE FAZER O PROXÍMO PRINT
   }
 
 
