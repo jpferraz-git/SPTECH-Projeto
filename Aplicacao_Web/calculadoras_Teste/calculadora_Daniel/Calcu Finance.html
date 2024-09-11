@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora FrontCheese</title>
+</head>
+<body>
+
+    <h1>
+        Simulador Financeiro FrontCheese
+    </h1> <br>
+    <form>
+        Olá empreendedor, <br>
+        Informe o nome do seu negócio:
+        <input type="text" id="input_nome_negocio"><br><br>
+        
+        Informe a produção mensal (em kg):
+        <input type="number" id="input_producao_mensal"><br><br>
+
+        Informe o custo do queijo por kg (em R$):
+        <input type="number" id="input_custo_queijo"><br><br>
+        
+        <p>Informe o tipo de produtor (Produtor Artesanal, Queijaria, Empresa de Laticínios):</p>
+        Tipo de Produtor: <input type="text" id="input_tipo_produtor"><br><br>
+    </form>
+    <button onclick="prosseguir()">Prosseguir</button>
+
+    <div id="div_resultado"></div>
+    <div id="div_infos"></div>
+    
+    <script>
+        function prosseguir() {
+            var nome = input_nome_negocio.value
+            var producaoMensal = parseFloat(input_producao_mensal.value)
+            var custoQueijo = parseFloat(input_custo_queijo.value)
+            
+            var tipoProdutor = input_tipo_produtor.value
+
+            var reducaoTotal = 0
+
+            if (tipoProdutor === "Produtor Artesanal") {
+                reducaoTotal = 15
+            } else if (tipoProdutor === "Queijaria") {
+                reducaoTotal = 7
+            } else if (tipoProdutor === "Empresa de Laticínios") {
+                reducaoTotal = 5
+            }
+
+            var divResultado = div_resultado
+
+            if (reducaoTotal > 0) {
+                if (producaoMensal > 0) {
+                    if (custoQueijo > 0) {
+                        var desperdicioKg = (reducaoTotal / 100) * producaoMensal
+                        var desperdicioCusto = desperdicioKg * custoQueijo
+                        
+                        divResultado.innerHTML = `
+                            Olá ${nome}, a redução total de desperdício de queijo é de ${reducaoTotal}% de toda a sua produção mensal.<br>
+                            Isso representa aproximadamente ${desperdicioKg.toFixed(2)} kg de queijo, ou R$ ${desperdicioCusto.toFixed(2)}.
+                        `
+                    } else {
+                        divResultado.innerHTML = "Preencha todos os campos corretamente e insira um tipo de produtor válido."
+                    }
+                } else {
+                    divResultado.innerHTML = "Preencha todos os campos corretamente e insira um tipo de produtor válido."
+                }
+            } else {
+                divResultado.innerHTML = "Preencha todos os campos corretamente e insira um tipo de produtor válido."
+            }
+
+            div_infos.innerHTML = `Os dados foram baseados no seguinte artigo <a href="https://www.epamig.br/ilct/wp-content/uploads/2020/07/QUEIJO-MINAS-ARTESANAL-PRINCIPAIS-PROBLEMAS.pdf">
+        Acesse o artigo
+    </a> `
+
+            alert("Reduza a sua perda agora com a FrontCheese!")
+        }
+    </script>
+</body>
+</html>
