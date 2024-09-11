@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Financeira</title>
+</head>
+<body>
+    <h1>Calculadora FrontCheese</h1>
+    Informe a quantidade de kgs de queijos produzidos no último mês:
+    <input type="number" id="inp_queijo"><br>
+    Informe o custo da produção do último mês:
+    <input type="number" id="inp_custo"><br>
+    Informe o faturamento do último mês:
+    <input type="number" id="inp_faturamento"><br>
+    <button onclick="CalcProj()">
+        Calcular Projeção
+    </button>
+    <div id="resultado"></div>
+</body>
+</html>
+<script>
+    function CalcProj () {
+        //Quantidade de kg de queijo produzidos
+        const qtdQueijo = Number(inp_queijo.value);
+        //Custo da produção
+        const custoProd = Number(inp_custo.value);
+        //Faturamento com desperdicio
+        const faturD = Number(inp_faturamento.value);
+
+        
+        //Preço de venda do kg
+        var lucroKG = (faturD - custoProd) / qtdQueijo;
+        
+        //Preço do KG
+        var custoKg = custoProd / qtdQueijo;
+        
+        //Quantidade de queijo realmente fabricada
+        var qtdQueijoR = qtdQueijo * 0.85;
+        
+        //Lucro com o desperdicio
+        var lucroD = lucroKG * qtdQueijoR;
+        
+        //pós sensor
+        var lucroV = lucroKG * qtdQueijo;
+
+        //Diferença dos lucros
+        var lucrodif = lucroV - lucroD;
+
+        resultado.innerHTML = `<h1>Projeção Atual</h1>
+        Você fabricou ${qtdQueijoR.toFixed(0)} queijos<br>
+        Teve um desperdicio de ${(qtdQueijo * 0.15).toFixed(0)} queijos<br>
+        Seu lucro por kg é R$ ${lucroKG.toFixed(2)}, seu lucro total foi de R$ ${lucroD.toFixed(1)}.<br>
+        <h2>Após instalação dos sensores</h2>
+        Você não teria nenhum desperdicio e seu lucro seria de R$ ${lucroV.toFixed(1)}<br>
+        A diferença de lucro seria de R$ ${lucrodif.toFixed(1)}`
+
+    }
+</script>
