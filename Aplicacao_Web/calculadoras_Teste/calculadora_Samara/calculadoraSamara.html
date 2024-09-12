@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Financeiro</title>
+</head>
+<body>
+    <h1>Faça suas simulações</h1>
+    <br>
+    <br>
+    Quantidade produzida no último mês:
+    <input id="input_quantidade">
+    <br>
+    <br>
+    Custo total para produção:
+    <input id="input_custo">
+    <br>
+    <br>
+    Faturamento do último mês:
+    <input id="input_faturamento">
+    <br>
+    <br>
+    <button onclick = "calcularVerificar()">Simule</button>
+    <div id="exibirMensagem"></div>
+</body>
+</html>
+
+<script>
+    function calcularVerificar() {
+        const quantidade = Number (input_quantidade.value)
+        const custo = Number (input_custo.value)
+        const faturamento = Number (input_faturamento.value)
+        const perda = 0.15
+        var lucro = (faturamento - custo)
+        var perdaMes = (quantidade * 0.85)
+        var qtdComDesperdicio = (quantidade * perda)
+
+        exibirMensagem.innerHTML = `
+        Seu faturamento no último mês foi de R$${faturamento}.<br>
+        Seu lucro no último mês foi de R$${lucro}.<br>
+        Houve um desperdício de ${qtdComDesperdicio} queijos no último mês.<br>
+        Com nossos sensores, seu faturamento no próximo mês será de ${faturamento * 1.15}.     
+        `
+    }
+</script>
